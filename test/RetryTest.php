@@ -2,9 +2,9 @@
 
 namespace Kelunik\Retry\Test;
 
+use PHPUnit\Framework\TestCase;
 use function Amp\Promise\wait;
 use function Kelunik\Retry\retry;
-use PHPUnit\Framework\TestCase;
 
 class RetryTest extends TestCase {
     public function testBasic() {
