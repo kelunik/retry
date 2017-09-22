@@ -22,6 +22,15 @@ class RetryTest extends TestCase {
         });
     }
 
+    public function testThrowableArrayCantBeEmpty() {
+        $this->expectException(\Error::class);
+
+        /* even without wait */
+        retry(1, function () {
+            return 42;
+        }, []);
+    }
+
     public function testRetry() {
         $i = 0;
 
