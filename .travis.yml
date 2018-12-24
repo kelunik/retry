@@ -6,6 +6,7 @@ php:
   - 7.0
   - 7.1
   - 7.2
+  - 7.3
   - nightly
 
 matrix:
@@ -15,8 +16,9 @@ matrix:
 
 before_script:
   # --ignore-platform-reqs, because https://github.com/FriendsOfPHP/PHP-CS-Fixer/pull/2722
-  - composer update -n --prefer-dist --ignore-platform-reqs
-  - composer require satooshi/php-coveralls dev-master --ignore-platform-reqs
+  - if [[ "${TRAVIS_PHP_VERSION}" != "7.0" ]]; then composer update -n --prefer-dist --ignore-platform-reqs; fi
+  - if [[ "${TRAVIS_PHP_VERSION}" == "7.0" ]]; then composer update -n --prefer-dist; fi
+  - composer require --dev php-coveralls/php-coveralls ^2.0.0 --ignore-platform-reqs
 
 script:
   - phpdbg -qrr vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
